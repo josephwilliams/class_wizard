@@ -125,8 +125,8 @@ We already know our beloved Pixel, but we can't forget Pixel's beloved cat, Pali
 class Cat
   attr_reader :name
 
-  def initialize(stats)
-    @name = stats[:name]
+  def initialize(name)
+    @name = name
   end
 
   def distract(enemy)
@@ -151,7 +151,7 @@ class Cat
 end
 ```
 
-After making sure to `require_relative` our `wizard` and `cat` files, we can truly begin.  Let's add our characters to the prologue.
+After making sure to `require_relative` our `wizard` and `cat` files, we can truly begin.  Let's use the `introduce_character` method to add our characters to the Prologue, and then let's `journey_forth`.
 
 ```
 [6] pry(main)> Palindrome = Cat.new("Palindrome")
