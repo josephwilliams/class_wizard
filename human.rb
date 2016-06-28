@@ -11,10 +11,10 @@ class Human
 
   def run
     @location += 5
-    puts "#{@name} wanders through the forest"
+    "#{@name} wanders through the forest"
   end
 
-  def says(words)
-    puts words
+  def speak(words)
+    words + ", says #{@name}"
   end
 end
