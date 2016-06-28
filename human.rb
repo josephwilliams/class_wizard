@@ -4,7 +4,6 @@ class Human
   def initialize(stats)
     @name = stats[:name]
     @health = stats[:health]
-    @strength = stats[:strength]
     @intellect = stats[:intellect]
     @location = 0
   end

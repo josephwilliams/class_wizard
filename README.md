@@ -8,12 +8,11 @@ Our tale begins with its protagonists: a pair of hapless humans.  So, let's give
 
 ```ruby
 class Human
-  attr_reader :name, :health, :strength, :intellect, :location
+  attr_reader :name, :health, :intellect, :location
 
   def initialize(stats)
     @name = stats[:name]
     @health = stats[:health]
-    @strength = stats[:strength]
     @intellect = stats[:intellect]
     @location = 0
   end
@@ -41,7 +40,6 @@ First, we create a hash with our character's stats. Every story begins with a he
   pixels_stats = {
     name: "Pixel",
     health: 10,
-    strength: 3,
     intellect: 7
   }
 
@@ -50,7 +48,7 @@ First, we create a hash with our character's stats. Every story begins with a he
 
 If you've loaded your `human.rb` file correctly (type `load 'human.rb' in pry`; it should return `true`), the previous block of code should return something like this:
 ```
-#<Human:0x007ffe48be8518 @health=10, @intellect=9, @location=0, @name="Pixel", @strength=3>
+#<Human:0x007ffe48be8518 @health=10, @intellect=7, @location=0, @name="Pixel">
 ```
 
 But wait! Pixel isn't just a human.  Pixel has magic coursing through her.  Pixel is a wizard.  Still, we want her to maintain the basic human abilities (methods), such as `run` and `speak`.
@@ -91,6 +89,83 @@ def cast_spell(enemy)
   enemy.health -= 1
 end
 ```
-Ah yeah.  Now Pixel can read books, 'calling' upon their teachings; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so); and cast a spell at an enemy.
+Ah yeah.  Now Pixel can read books, 'calling' upon their teachings; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.
 
-I think it's time to begin our journey.  
+Now that we've set up what's necessary for characters, it's time to begin our journey.  We'll need to create a backdrop.  What could be more fitting (and uninspired) than a Prologue Class?
+
+```ruby
+class Prologue
+  attr_reader :characters
+
+  def initialize
+    @characters = []
+    puts "The adventure has begun.."
+  end
+
+  def introduce_character(character)
+    @characters << character
+    name = character.name
+
+    puts "{name} has entered the story!"
+  end
+
+  def journey_forth
+    sentence_start = @characters.map! { |character| character.name }.join(" and ")
+    sentence_end = " begin their journey.."
+    sentence_start + sentence_end
+  end
+end
+```
+
+So, what have we here?  We initialize our Prologue with an empty array for our `@characters` instance variable.  We have a method for introducing a character, and another, purely for rhetoric's sake, of setting said characters on their journey.  This is still a tale, after all.  Code just makes it possible (and fun!).
+
+We already know our beloved Pixel, but we can't forget Pixel's beloved cat, Palindrome.  Let's quickly code up a Cat class.
+
+```ruby
+class Cat
+  attr_reader :name
+
+  def initialize(stats)
+    @name = stats[:name]
+  end
+
+  def distract(enemy)
+    powers = [
+      "jumping off walls",
+      "sand-paper licks",
+      "mind control lol wut"
+    ]
+
+    "#{@name} distracts #{enemy.name} with #{powers.sample}"
+  end
+
+  def run
+    @location += 5
+    "#{@name} wanders through the forest"
+  end
+
+  def speak(words)
+    sounds = ["meow", "purr", "hiss"]
+    sounds.sample
+  end
+end
+```
+
+After making sure to `require_relative` our `wizard` and `cat` files, we can truly begin.  Let's add our characters to the prologue.
+
+```
+[6] pry(main)> Palindrome = Cat.new("Palindrome")
+=> #<Cat:0x007f9ef92d9b88 @name="Palindrome">
+```
+
+```
+[7] pry(main)> Story = Prologue.new
+Our adventure has begun..
+=> #<Prologue:0x007f9ef92966d0 @characters=[]>
+[8] pry(main)> Story.introduce_character(Pixel)
+=> "Pixel has entered the story!"
+[9] pry(main)> Story.introduce_character(Palindrome)
+=> "Palindrome has entered the story!"
+[10] pry(main)> Story.journey_forth
+=> "Pixel and Palindrome begin their journey.."
+```

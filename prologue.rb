@@ -1,3 +1,6 @@
+require_relative 'wizard'
+require_relative 'cat'
+
 class Prologue
   attr_reader :characters
 
@@ -10,18 +13,12 @@ class Prologue
     @characters << character
     name = character.name
 
-    puts "{name} has entered the story!"
+    "#{name} has entered the story!"
   end
 
   def journey_forth
-    generic_openers = [
-      "takes their first bold steps",
-      "leaves the shire",
-      "finally gets out of bed"
-    ]
-
-    @characters.each do |character|
-      puts "{character.name}" + generic_openers.sample
-    end
+    sentence_start = @characters.map! { |character| character.name }.join(" and ")
+    sentence_end = " begin their journey.."
+    sentence_start + sentence_end
   end
 end
