@@ -53,6 +53,7 @@ If you've loaded your `human.rb` file correctly (type `load 'human.rb' in pry`; 
 #<Human:0x007ffe48be8518 @health=10, @intellect=7, @location=0, @name="Pixel">
 ```
 
+#### The Wizard Class
 But wait! Pixel isn't just a human.  Pixel has magic coursing through her.  Pixel is a wizard.  Still, we want her to maintain the basic human abilities (methods), such as `run` and `speak`.
 
 Within a new file, `wizard.rb`, we're setting up the Wizard class as a subclass of the Human superclass.  The `require_relative 'human'` makes sure to reference the `human.rb` file, presumably in the same directory.  The `<` operator in the class name denotes that wizard will be a subclass of human, thus containing its methods.
@@ -93,6 +94,7 @@ end
 ```
 Ah yeah.  Now Pixel can read books, 'calling' upon their teachings; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.
 
+#### The Prologue Class
 Now that we've set up what's necessary for characters, it's time to begin our journey.  We'll need to create a backdrop.  What could be more fitting (and uninspired) than a Prologue Class?
 
 ```ruby
@@ -121,6 +123,7 @@ end
 
 So, what have we here?  We initialize our Prologue class object with an empty array for our `@characters` instance variable.  We have a method, `introduce_character` explicitly named for introducing a character, and another, `journey_forth`, for setting said characters on their journey.  This is still a tale, after all.  Code just makes it possible (and fun!).  Combining the aforementioned methods, we have a perfect prologue.
 
+#### The Cat Class
 Also!, we already know our beloved Pixel, but we can't forget Pixel's beloved cat, Palindrome.  Let's quickly code up a Cat class.
 
 ```ruby
@@ -182,6 +185,7 @@ Great! Awesome! Drama! Well, not really.  Pixel and Palindrome are stuck in the 
 => "meow"
 ```
 
+#### The Dragon Class
 I did say this was going to be a classic story of good vs. evil, of heroes versus villains.  So, let's code up a villain: `dragon.rb`.
 
 ```ruby
@@ -218,6 +222,7 @@ Primus lets out a smokey belch
 => #<Dragon:0x007f856aab0a30 @distracted=true, @health=100, @name="Primus">
 ```
 
+#### The Climactic_Battle_Scene Class
 This story is in desperate need of some drama.  The prologue has come to a stirring conclusion.  The scene is set.  Let the deadly encounter begin.  Let's create a new class and file to hold it: `climactic_battle_scene`.
 
 ```ruby
@@ -290,8 +295,9 @@ Let's break this down.  First - the not shown: we relative_require the necessary
 
 We have methods to depict a `first_encounter`, to determine an `end_of_deadly_encounter`, and to render `satisfying_conclusion`.  But our `battle_sequence` method is woefully lacking.
 
-But, first, we have a more serious problem.  Pixel, our wizard, has 10 health and a `cast_spell` ability that lowers the enemy's health by 1.  Primus, the dragon, has 100 health, and can `breathe_fire`, removing 3 of his enemy's health.  This does not bode well for Pixel or her beloved cat.  But we're the authors of this tale, so let's thicken the plot:
+But, first, we have a more serious problem.  Pixel, our wizard, has 10 health and a `cast_spell` ability that lowers the enemy's health by 1.  Primus, the dragon, has 100 health, and can `breathe_fire`, removing 3 of his enemy's health.  This does not bode well for Pixel or her beloved cat.  But we're the authors of this tale, so let's thicken the plot.
 
+#### The Ancient_Tome Module
 ```ruby
 module Ancient_Tome
   def decrypt(enemy)
