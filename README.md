@@ -303,9 +303,7 @@ But, first, we have a more serious problem.  Pixel, our wizard, has 10 health an
 #### The Ancient_Tome Module
 There's a rhetoric device called 'Deus ex machina'.  It's when a desperate hopeless protagonist is saved by seeming divine intervention.  It's happening right now.
 
-```
 "Pixel stumbles back, stunned.  A dragon! A real, live, fire-breathing dragon!  How could she ever defend herself? Palindrome, unmoved, sees something beneath nearby leaves on the forest floor.  He pounces on it and paws away at the rubble.  It's a book!  A book of ancient spells and odd oddities!  Pixel picks it up and reads the first page."
-```
 
 ```ruby
 module Ancient_Tome
