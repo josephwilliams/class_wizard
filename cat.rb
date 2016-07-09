@@ -12,6 +12,7 @@ class Cat
       "mind control lol wut"
     ]
 
+    enemy.distracted = true
     "#{@name} distracts #{enemy.name} with #{powers.sample}"
   end
 
@@ -20,7 +21,7 @@ class Cat
     "#{@name} wanders through the forest"
   end
 
-  def speak(words)
+  def speak
     ["meow", "purr", "hiss"].sample
   end
 end

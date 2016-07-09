@@ -21,4 +21,12 @@ class Prologue
     sentence_end = " begin their journey.."
     sentence_start + sentence_end
   end
+
+  def begin_story
+    @characters.each do |character|
+      introduce_character(character)
+    end
+
+    journey_forth
+  end
 end
