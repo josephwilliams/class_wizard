@@ -1,5 +1,6 @@
 class Human
-  attr_reader :name, :health, :strength, :intellect, :location
+  attr_reader :name, :intellect, :location
+  attr_accessor :health
 
   def initialize(stats)
     @name = stats[:name]

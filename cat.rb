@@ -3,6 +3,7 @@ class Cat
 
   def initialize(name)
     @name = name
+    speak
   end
 
   def distract(enemy)
@@ -13,7 +14,7 @@ class Cat
     ]
 
     enemy.distracted = true
-    "#{@name} distracts #{enemy.name} with #{powers.sample}"
+    puts "#{@name} distracts #{enemy.name} with #{powers.sample}"
   end
 
   def run
@@ -22,6 +23,6 @@ class Cat
   end
 
   def speak
-    ["meow", "purr", "hiss"].sample
+    puts ["meow", "purr", "hiss"].sample
   end
 end

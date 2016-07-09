@@ -10,7 +10,8 @@ Our tale begins with its protagonist: a hapless wandering human.  So, let's give
 
 ```ruby
 class Human
-  attr_reader :name, :health, :intellect, :location
+  attr_reader :name, :intellect, :location
+  attr_accessor :health
 
   def initialize(stats)
     @name = stats[:name]
@@ -132,6 +133,7 @@ class Cat
 
   def initialize(name)
     @name = name
+    speak
   end
 
   def distract(enemy)
@@ -142,7 +144,7 @@ class Cat
     ]
 
     enemy.distracted = true
-    "#{@name} distracts #{enemy.name} with #{powers.sample}"
+    puts "#{@name} distracts #{enemy.name} with #{powers.sample}"
   end
 
   def run
@@ -152,7 +154,7 @@ class Cat
 
   def speak
     sounds = ["meow", "purr", "hiss"]
-    sounds.sample
+    puts sounds.sample
   end
 end
 ```
@@ -191,7 +193,7 @@ I did say this was going to be a classic story of good vs. evil, of heroes versu
 ```ruby
 class Dragon
   attr_reader :name
-  attr_accessor :distracted
+  attr_accessor :distracted, :health
 
   def initialize(stats)
     @name = stats[:name]
@@ -203,15 +205,16 @@ class Dragon
 
   def breath_fire(enemy)
     unless @distracted
+      puts "#{@name} breathes fire at #{enemy.name}!"
       enemy.health -= 3
     else
-      "#{@name} is distracted!"
+      puts "#{@name} is distracted!"
     end
   end
 end
 ```
 
-Thus have we have our `dragon` class.  Not very refined; it breathes fire and it has `name`, `health`, and `distracted` instance variables.  Note the `attr_accessor :distracted`.  This will allow us to check or change this attribute from outside of the class without getter or setter methods.
+Thus have we have our `dragon` class.  Not very refined; it breathes fire and it has `name`, `health`, and `distracted` instance variables.  Note the `attr_accessor :distracted, :health`.  This will allow us to check or change these attribute from outside of the class without getter or setter methods.
 
 I've named the dragon Primus and given him 100 health.  Chilling.
 ```ruby
@@ -298,14 +301,122 @@ We have methods to depict a `first_encounter`, to determine an `end_of_deadly_en
 But, first, we have a more serious problem.  Pixel, our wizard, has 10 health and a `cast_spell` ability that lowers the enemy's health by 1.  Primus, the dragon, has 100 health, and can `breathe_fire`, removing 3 of his enemy's health.  This does not bode well for Pixel or her beloved cat.  But we're the authors of this tale, so let's thicken the plot.
 
 #### The Ancient_Tome Module
+There's a rhetoric device called 'Deus ex machina'.  It's when a desperate hopeless protagonist is saved by seeming divine intervention.  It's happening right now.
+
+```ruby
+"Pixel stumbles back, stunned.  A dragon! A real, live, fire-breathing dragon!  How could she ever defend herself? Palindrome, unmoved, sees something beneath nearby leaves on the forest floor.  He pounces on it and paws away at the rubble.  It's a book!  A book of ancient spells and odd oddities!  Pixel picks it up and reads the first page."
+```
+
 ```ruby
 module Ancient_Tome
   def decrypt(enemy)
+    puts "#{enemy.name} is decrypted! What!!"
     enemy.health -= 50
   end
 
   def cook_tree_bark_soup
+    puts "yum"
     @health += 1
   end
 end
 ```
+
+Woah.  A module? Awesome.  Now that Pixel has read this `Ancient_Tome`, let's go back and `include` it in the `Wizard` class.  By doing this, we 'include' the methods in the given module, making them callable within the containing Class.
+
+```ruby
+require_relative 'ancient_tome'
+
+class Wizard < Human
+  include Ancient_Tome
+  ...
+```
+
+And, by my pen (keyboard), Pixel can now decrypt her enemies, and cook a mean tree bark soup.
+With our new found skills, there is hope against the dragon Primus.  Let's return to the `battle_sequence` method in the `Climactic_Battle_Scene` class.
+
+```ruby
+def battle_sequence
+  first_encounter
+
+  until end_of_deadly_encounter
+    @antagonist.breathe_fire(@protagonist)
+    # oh no!
+    @cat.distract(@antagonist)
+    @antagonist.breathe_fire(@protagonist)
+    # "Primus is distracted!"
+    @protagonist.decrypt(@antagonist)
+  end
+
+  satisfying_conclusion
+end
+```
+
+Before we step into battle, I've made a design decision to place all my `require_relative` statements into a single file, `story_elements.rb`, as to load them all at once in pry, rather than typing them in one by one.
+
+```ruby
+require_relative 'human'
+require_relative 'wizard'
+require_relative 'cat'
+require_relative 'dragon'
+require_relative 'ancient_tome'
+require_relative 'prologue'
+require_relative 'climactic_battle_scene'
+```
+```ruby
+[1] pry(main)> load 'story_elements.rb'
+=> true
+```
+
+Okay, enough of that.  Let the climax begin!! In terminal, from start to finish, our story plays out:
+
+```ruby
+My-MacBook-Pro:class_wizards jw$ pry
+[1] pry(main)> load 'story_elements.rb'
+=> true
+[2] pry(main)> pixels_stats = {
+[2] pry(main)*   name: "Pixel",
+[2] pry(main)*   health: 10,
+[2] pry(main)*   strength: 3,
+[2] pry(main)*   intellect: 7
+[2] pry(main)* }
+=> {:name=>"Pixel", :health=>10, :strength=>3, :intellect=>7}
+[3] pry(main)>
+[4] pry(main)> primus_stats = {
+[4] pry(main)*   name: "Primus",
+[4] pry(main)*   health: 100
+[4] pry(main)* }
+=> {:name=>"Primus", :health=>100}
+[5] pry(main)> Pixel = Wizard.new(pixels_stats)
+=> #<Wizard:0x007f95e1850c68 @health=10, @intellect=7, @location=0, @name="Pixel">
+[6] pry(main)> Palindrome = Cat.new("Palindrome")
+hiss
+=> #<Cat:0x007f95e2256758 @name="Palindrome">
+[7] pry(main)> Primus = Dragon.new(primus_stats)
+Primus lets out a smokey belch
+=> #<Dragon:0x007f95e2299620 @distracted=true, @health=100, @name="Primus">
+[8] pry(main)> Story = Climactic_Battle_Scene.new(Pixel, Palindrome, Primus)
+=> #<Climactic_Battle_Scene:0x007f95e2229640
+ @antagonist=#<Dragon:0x007f95e2299620 @distracted=true, @health=100, @name="Primus">,
+ @cat=#<Cat:0x007f95e2256758 @name="Palindrome">,
+ @protagonist=#<Wizard:0x007f95e1850c68 @health=10, @intellect=7, @location=0, @name="Pixel">>
+[9] pry(main)> Story.battle_sequence
+Primus flaps his mighty wings and descends before
+    the frightened wayfarers.  '7, 11, 17, 3!', he putters, fluent
+    only in primes.  But Pixel understands every syllable.
+    Primus is hungry.  And hungry dragons need to eat.
+Primus is distracted!
+Palindrome distracts Primus with sand-paper licks
+Primus is distracted!
+Primus is decrypted! What!!
+Primus is distracted!
+Palindrome distracts Primus with mind control lol wut
+Primus is distracted!
+Primus is decrypted! What!!
+Pixel emerges victorious! Sweet relief!
+```
+
+PIXEL HAS DEFEATED PRIMUS! And Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
+
+This completes are long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even eloquent english-like language that allows for clean, straightforward object-oriented programming.
+
+Anywho, I hope you've enjoyed the tale.  Go forth and code!

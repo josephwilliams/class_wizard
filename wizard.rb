@@ -1,6 +1,9 @@
 require_relative 'human'
+require_relative 'ancient_tome'
 
 class Wizard < Human
+  include Ancient_Tome
+
   def speak(words)
     super + " wisely"
   end

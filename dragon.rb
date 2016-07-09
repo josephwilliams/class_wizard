@@ -1,6 +1,6 @@
 class Dragon
   attr_reader :name
-  attr_accessor :distracted
+  attr_accessor :distracted, :health
 
   def initialize(stats)
     @name = stats[:name]
@@ -10,11 +10,12 @@ class Dragon
     puts "#{@name} lets out a smokey belch"
   end
 
-  def breath_fire(enemy)
+  def breathe_fire(enemy)
     unless @distracted
+      puts "#{@name} breathes fire at #{enemy.name}!"
       enemy.health -= 3
     else
-      "#{@name} is distracted!"
+      puts "#{@name} is distracted!"
     end
   end
 end
