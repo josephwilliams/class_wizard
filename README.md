@@ -415,6 +415,6 @@ Pixel emerges victorious! Sweet relief!
 
 PIXEL HAS DEFEATED PRIMUS! And Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
 
-This completes are long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even eloquent english-like language that allows for clean, straightforward object-oriented programming.
+This completes are long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even eloquent english-like language that allows for clean, straightforward object-oriented programming, and the possibilities are limitless.
 
 Anywho, I hope you've enjoyed the tale.  Go forth and code!
