@@ -33,7 +33,7 @@ end
 ```
 
 Let's give this a good look-over.  First, let's look at our initialize method.  This method, called upon each new instantiation of this class, requires that a 'stats' hash be passed in.
-This hash will include key value pairs for our character's `name`, `health`, `strength`, and `intellect`, which are then created as instance variables.
+This hash will include key value pairs for our character's `name`, `health`, and `intellect`, which are then created as instance variables.
 
 The `attr_reader` up top acts as a getter method for the instance variables that follow.
 `attr_writer` would act as a setter method, and `attr_accessor` would provide both getter and setter.  Let's see this in action.
@@ -56,7 +56,7 @@ If you've loaded your `human.rb` file correctly (type `load 'human.rb' in pry`; 
 ```
 
 #### The Wizard Class
-But wait! Pixel isn't just a human.  Pixel has magic coursing through her.  Pixel is a wizard.  Still, we want her to maintain the basic human abilities (methods), such as `run` and `speak`.
+But wait! Pixel isn't just a human.  Pixel has magic in her bones.  Pixel is a wizard.  Still, we want her to maintain the basic human abilities (methods), such as `run` and `speak`.
 
 Within a new file, `wizard.rb`, we're setting up the Wizard class as a subclass of the Human superclass.  The `require_relative 'human'` makes sure to reference the `human.rb` file, presumably in the same directory.  The `<` operator in the class name denotes that wizard will be a subclass of human, thus containing its methods.
 
@@ -70,7 +70,7 @@ class Wizard < Human
 end
 ```
 
-Pixel, being a human, can do human things, such as 'run' and 'speak'.  However, being also a wizard, she would probably sound pretty smart.  We've made an adjustment to the Human class' `speak` method.  First, via `super`, we call the method in the super class, printing the input `words` in the console.  Our addition, however, adds the `" wisely"` string.
+Pixel, being a human, can do human things, such as 'run' and 'speak'.  However, being also a wizard, she would probably sound pretty smart.  We've made an adjustment to the Human class' `speak` method.  First, via `super`, we call the method in the super class, printing the input `words` in the console.  Our addition adds the `" wisely"` string.
 
 ```
 [5] pry(main)> pixel.speak("is there an echo in here?")
@@ -80,8 +80,7 @@ Pixel, being a human, can do human things, such as 'run' and 'speak'.  However, 
 Now, let's give Pixel some powers.
 
 ```ruby
-def read(book, teachings)
-  teachings.call
+def read(book)
   "#{@name} reads #{book}"
 end
 
@@ -94,7 +93,7 @@ def cast_spell(enemy)
   enemy.health -= 1
 end
 ```
-Ah yeah.  Now Pixel can read books, 'calling' upon their teachings; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.
+Ah yeah.  Now Pixel can read books; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.
 
 #### The Prologue Class
 Now that we've set up what's necessary for characters, it's time to begin our journey.  We'll need to create a backdrop.  What could be more fitting (and uninspired) than a Prologue Class?
@@ -164,6 +163,7 @@ After making sure to `require_relative` our `wizard` and `cat` files in our `pro
 
 ```ruby
 [6] pry(main)> Palindrome = Cat.new("Palindrome")
+meow
 => #<Cat:0x007f9ef92d9b88 @name="Palindrome">
 ```
 
@@ -215,7 +215,7 @@ class Dragon
 end
 ```
 
-Thus have we have our `dragon` class.  Not very refined; it breathes fire and it has `name`, `health`, and `distracted` instance variables.  Note the `attr_accessor :distracted, :health`.  This will allow us to check or change these attribute from outside of the class without getter or setter methods.
+Thus have we have our `dragon` class.  Not very refined; it breathes fire and it has `name`, `health`, and `distracted` instance variables.  Note the `attr_accessor :distracted, :health`.  This will allow us to check or change these attributes from outside of the class without getter or setter methods.
 
 I've named the dragon Primus and given him 100 health.  Chilling.
 ```ruby
@@ -241,11 +241,11 @@ class Climactic_Battle_Scene
     puts "#{@antagonist.name} flaps his mighty wings and descends before
           the frightened wayfarers.  '7, 11, 17, 3!', he putters, fluent
           only in primes.  But #{@protagonist.name} understands every syllable.
-          #{@antagonist.name} is hungry.  And hungry dragons need to eat."
+          #{@antagonist.name} is hungry.  And hungry dragons must eat."
   end
 
   def end_of_deadly_encounter
-    @antagonist.health == 0 or @protagonist.health == 0
+    @antagonist.health <= 0 or @protagonist.health <= 0
   end
 
   def satisfying_conclusion
@@ -297,14 +297,14 @@ Let's break this down.  First - the not shown: we relative_require the necessary
  @protagonist={:name=>"Palindrome", :health=>3, :strength=>2, :intellect=>2}>
 ```
 
-We have methods to depict a `first_encounter`, to determine an `end_of_deadly_encounter`, and to render `satisfying_conclusion`.  But our `battle_sequence` method is woefully lacking.
+We have methods to depict a `first_encounter`, to determine an `end_of_deadly_encounter`, and to output a `satisfying_conclusion`.  But our `battle_sequence` method is woefully lacking.
 
 But, first, we have a more serious problem.  Pixel, our wizard, has 10 health and a `cast_spell` ability that lowers the enemy's health by 1.  Primus, the dragon, has 100 health, and can `breathe_fire`, removing 3 of his enemy's health.  This does not bode well for Pixel or her beloved cat.  But we're the authors of this tale, so let's thicken the plot.
 
 #### The Ancient_Tome Module
-There's a rhetoric device called 'Deus ex machina'.  It's when a desperate hopeless protagonist is saved by seeming divine intervention.  It's happening right now.
+There's a rhetoric device called 'deus ex machina'.  It's when a desperately hopeless protagonist is saved by seeming divine intervention.  It's happening right now.
 
-"Pixel stumbles back, stunned.  A dragon! A real, live, fire-breathing dragon!  How could she ever defend herself? Palindrome, unmoved, sees something beneath nearby leaves on the forest floor.  He pounces on it and paws away at the rubble.  It's a book!  A book of ancient spells and odd oddities!  Pixel picks it up and reads the first page."
+"Pixel stumbles back, stunned.  A dragon! A real, live, fire-breathing dragon!  How could she ever defend herself? Palindrome, unmoved, sees something hidden beneath the scattered leaves on the forest floor.  He pounces on it and paws away at the rubble.  It's a book!  A book of ancient spells and esoteric oddities!  Pixel hears Palindrome's purr, picks up the tome, and reads the first page."
 
 ```ruby
 module Ancient_Tome
@@ -369,7 +369,7 @@ require_relative 'climactic_battle_scene'
 Okay, enough of that.  Let the climax begin!! In terminal, from start to finish, our story plays out:
 
 ```ruby
-My-MacBook-Pro:class_wizards jw$ pry
+My-MacBook-Pro:class_wizard jw$ pry
 [1] pry(main)> load 'story_elements.rb'
 => true
 [2] pry(main)> pixels_stats = {
@@ -414,8 +414,8 @@ Primus is decrypted! What!!
 Pixel emerges victorious! Sweet relief!
 ```
 
-PIXEL HAS DEFEATED PRIMUS! And Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
+PIXEL HAS DEFEATED PRIMUS! The `until` loop in the `battle_sequence` method continued until the conditional statement from the `end_of_deadly_encounter` was met.  Primus has <= (less than or equal to zero health.  With the conclusion of this loop, the `satisfying_conclusion` method is called, Pixel is determined the winner, and Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
 
-This completes are long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even eloquent english-like language that allows for clean, straightforward object-oriented programming, and the possibilities are limitless.
+This completes our long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even, at times, eloquent language that allows for clean, straightforward, english-like object-oriented programming.  As the old trite maxim goes: the possibilities are truly limitless.
 
-Anywho, I hope you've enjoyed the tale.  Go forth and code!
+Anywho, I hope you've enjoyed the tale.  Now go forth and code!

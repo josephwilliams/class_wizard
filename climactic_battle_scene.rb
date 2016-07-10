@@ -18,7 +18,7 @@ class Climactic_Battle_Scene
   end
 
   def end_of_deadly_encounter
-    @antagonist.health == 0 or @protagonist.health == 0
+    @antagonist.health <= 0 or @protagonist.health <= 0
   end
 
   def satisfying_conclusion

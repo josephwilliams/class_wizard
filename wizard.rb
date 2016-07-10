@@ -8,8 +8,7 @@ class Wizard < Human
     super + " wisely"
   end
 
-  def read(book, teachings)
-    teachings.call
+  def read(book)
     "#{@name} reads #{book}"
   end
 
