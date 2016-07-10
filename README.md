@@ -414,7 +414,7 @@ Primus is decrypted! What!!
 Pixel emerges victorious! Sweet relief!
 ```
 
-PIXEL HAS DEFEATED PRIMUS! The `until` loop in the `battle_sequence` method continued until the conditional statement from the `end_of_deadly_encounter` was met.  Primus has <= (less than or equal to zero health.  With the conclusion of this loop, the `satisfying_conclusion` method is called, Pixel is determined the winner, and Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
+PIXEL HAS DEFEATED PRIMUS! The `until` loop in the `battle_sequence` method continued until the conditional statement from the `end_of_deadly_encounter` was met.  Primus' health is 0.  With the conclusion of this loop, the `satisfying_conclusion` method is called, Pixel is determined the winner, and Palindrome, finder of ancient tome, deserves at least some of the credit.  The two will continue their journey, feasting on tree bark soup for many a moon.
 
 This completes our long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant, even, at times, eloquent language that allows for clean, straightforward, english-like object-oriented programming.  As the old trite maxim goes: the possibilities are truly limitless.
 
