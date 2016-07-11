@@ -1,7 +1,6 @@
 pixels_stats = {
   name: "Pixel",
   health: 10,
-  strength: 3,
   intellect: 7
 }
 

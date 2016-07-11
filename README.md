@@ -1,10 +1,9 @@
-This is a blog post about how ruby classes and the methods within can interact to create something beautiful: a simple program.  For greatest ease, I'd recommend using `pry` or `irb` to follow along.
+This is a article about how ruby classes and the methods within can interact to create something beautiful: a simple program.  For greatest ease, I'd recommend using `pry` or `irb` to follow along.
 
 # The Wizard, the Cat, and the Dragon
 ### a Strange Tale of Ruby Class Interaction
 
 So you've coded up some clever ruby methods and you're feeling pretty slick.  Well, it's time to incorporate those methods into something grander: a classic good vs. evil tale with a medieval fantasy backdrop.
-
 
 #### The Human Class
 Our tale begins with its protagonist: a hapless wandering human.  So, let's give them a class:
@@ -70,7 +69,7 @@ class Wizard < Human
 end
 ```
 
-Pixel, being a human, can do human things, such as 'run' and 'speak'.  However, being also a wizard, she would probably sound pretty smart.  We've made an adjustment to the Human class' `speak` method.  First, via `super`, we call the method in the super class, printing the input `words` in the console.  Our addition adds the `" wisely"` string.
+Pixel, being a human, can still do human things, such as 'run' and 'speak'.  The `Wizard` class would "inherit" these methods.  Some methods, however, despite maintaining the same name, could change. In this case, we're making Pixel sound smarter - she is a wizard, after all. I've made an adjustment to the Human class' `speak` method.  First, via `super`, we call the method in the super class, printing the input `words` in the console.  Our addition adds the `" wisely"` string.
 
 ```
 [5] pry(main)> pixel.speak("is there an echo in here?")
@@ -93,7 +92,7 @@ def cast_spell(enemy)
   enemy.health -= 1
 end
 ```
-Ah yeah.  Now Pixel can read books; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.
+Ah yeah.  Now Pixel can read books; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.  Note that we can now instantiate Pixel with the `Wizard` class, i.e. `Wizard.new(...)`.
 
 #### The Prologue Class
 Now that we've set up what's necessary for characters, it's time to begin our journey.  We'll need to create a backdrop.  What could be more fitting (and uninspired) than a Prologue Class?
@@ -269,20 +268,15 @@ end
 Let's break this down.  First - the not shown: we relative_require the necessary files.  Then, we initialize our `Climactic_Battle_Scene` with the same stats hashes used previously for Pixel, Palindrome, and Primus:
 
 ```ruby
-[1] pry(main)> palindromes_stats = {
-[1] pry(main)*   name: "Palindrome",
-[1] pry(main)*   health: 3,
-[1] pry(main)*   strength: 2,
-[1] pry(main)*   intellect: 2
-[1] pry(main)* }
-=> {:name=>"Palindrome", :health=>3, :strength=>2, :intellect=>2}
+[1] pry(main)> Palindrome = Cat.new("Palindrome")
+meow
+=> #<Cat:0x007f9ef92d9b88 @name="Palindrome">
 [2] pry(main)> pixels_stats = {
 [2] pry(main)*   name: "Pixel",
 [2] pry(main)*   health: 10,
-[2] pry(main)*   strength: 3,
 [2] pry(main)*   intellect: 7
 [2] pry(main)* }
-=> {:name=>"Pixel", :health=>10, :strength=>3, :intellect=>7}
+=> {:name=>"Pixel", :health=>10, :intellect=>7}
 [3] pry(main)> primus_stats = {
 [3] pry(main)*   name: "Primus",
 [3] pry(main)*   health: 100
@@ -290,11 +284,11 @@ Let's break this down.  First - the not shown: we relative_require the necessary
 => {:name=>"Primus", :health=>100}
 [4] pry(main)> load 'climactic_battle_scene.rb'
 => true
-[5] pry(main)> Climactic_Battle_Scene.new(palindromes_stats, pixels_stats, primus_stats)
+[5] pry(main)> Climactic_Battle_Scene.new(pixels_states, Palindrome, primus_stats)
 => #<Climactic_Battle_Scene:0x007fea032755e8
  @antagonist={:name=>"Primus", :health=>100},
- @cat={:name=>"Pixel", :health=>10, :strength=>3, :intellect=>7},
- @protagonist={:name=>"Palindrome", :health=>3, :strength=>2, :intellect=>2}>
+ @cat=#<Cat:0x007f9f21086070 @name="Palindrome">,
+ @protagonist={:name=>"Pixel", :health=>3, :intellect=>2}>
 ```
 
 We have methods to depict a `first_encounter`, to determine an `end_of_deadly_encounter`, and to output a `satisfying_conclusion`.  But our `battle_sequence` method is woefully lacking.
@@ -375,10 +369,9 @@ My-MacBook-Pro:class_wizard jw$ pry
 [2] pry(main)> pixels_stats = {
 [2] pry(main)*   name: "Pixel",
 [2] pry(main)*   health: 10,
-[2] pry(main)*   strength: 3,
 [2] pry(main)*   intellect: 7
 [2] pry(main)* }
-=> {:name=>"Pixel", :health=>10, :strength=>3, :intellect=>7}
+=> {:name=>"Pixel", :health=>10, :intellect=>7}
 [3] pry(main)>
 [4] pry(main)> primus_stats = {
 [4] pry(main)*   name: "Primus",
