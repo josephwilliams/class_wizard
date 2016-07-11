@@ -112,7 +112,7 @@ class Prologue
   end
 
   def journey_forth
-    sentence_start = @characters.map! { |character| character.name }.join(" and ")
+    sentence_start = @characters.map { |character| character.name }.join(" and ")
     sentence_end = " begin their journey.."
     sentence_start + sentence_end
   end
