@@ -92,15 +92,13 @@ def cast_spell(enemy)
   enemy.health -= 1
 end
 ```
-Ah yeah.  Now Pixel can read books; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.  Note that we can now instantiate Pixel with the `Wizard` class, i.e. `Wizard.new(...)`.
+Ah yeah.  Now Pixel can read books; learn, increasing her intellect by 1 (remember, without a `attr_writer` or `attr_accessor`, attributes like this wouldn't be changeable without specific methods that do so, like this one); and cast a spell at an enemy.  Note that we can now instantiate Pixel with the `Wizard` class, i.e. `Wizard.new(pixels_stats)`.
 
 #### The Prologue Class
 Now that we've set up what's necessary for characters, it's time to begin our journey.  We'll need to create a backdrop.  What could be more fitting (and uninspired) than a Prologue Class?
 
 ```ruby
 class Prologue
-  attr_reader :characters
-
   def initialize
     @characters = []
     puts "The adventure has begun.."
