@@ -413,4 +413,4 @@ This completes our long, strange coding journey into ruby class interactions.  P
 
 Anywho, I hope you've enjoyed the tale.  Now go forth and code!
 
-![cat and dragon](cat-and-dragon.jpeg)
+!(cat-and-dragon.jpeg)
