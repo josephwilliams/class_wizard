@@ -412,3 +412,5 @@ PIXEL HAS DEFEATED PRIMUS! The `until` loop in the `battle_sequence` method cont
 This completes our long, strange coding journey into ruby class interactions.  Please note that everything you've just read is not necessarily best practice, but rather was written for the purpose of demonstration and experimentation.  Ruby is truly an elegant and even, at times, eloquent language that allows for clean, straightforward, english-like object-oriented programming.  As the old trite maxim goes: the possibilities are truly limitless.
 
 Anywho, I hope you've enjoyed the tale.  Now go forth and code!
+
+[cat and dragon](cat-and-dragon.jpeg)
